@@ -1,9 +1,12 @@
 #!/usr/bin/env node
 var debug = require('debug')('pay_server');
 var app = require('../app');
+var redis_json = require('../config/redis.json');
+var redis_pools = require('../routes/nosql/redis_pools');
 
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 20003);
 
 var server = app.listen(app.get('port'), function() {
+  redis_pools.configure(redis_json);
   debug('Express server listening on port ' + server.address().port);
 });
