@@ -19,3 +19,15 @@ redis_fly_flow_wrapper.set = function(orderid,order_info,cb){
     });
 };
 
+redis_fly_flow_wrapper.get = function(orderid,cb){
+    redis_pools.execute('pool_1',function(client, release){
+        client.hget(h_fly_flow,orderid,function (err, reply){
+            if(err){
+                //  some thing log
+                console.error(err);
+            }
+            cb(reply);
+            release();
+        });
+    });
+};
