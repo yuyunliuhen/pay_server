@@ -22,6 +22,7 @@ exports.on_pay_result = function(req,res){
     order_info.cardstatus = req.body['cardstatus'];
     order_info.merpriv = req.body['merpriv'];
     var verifystring = req.body['verifystring'];
+    /*
     try{
         var decrypted_verifystring = key.decrypt(verifystring, 'utf8');
         http_logger.debug(decrypted_verifystring);
@@ -31,6 +32,7 @@ exports.on_pay_result = function(req,res){
     catch (e){
         http_logger.error(e.message);
     }
+    */
     redis_fly_flow_wrapper.set(order_info.orderid,order_info,function(reply){
         res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
         var code = "0";

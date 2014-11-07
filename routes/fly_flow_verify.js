@@ -9,6 +9,6 @@ exports.on_pay_result_verify = function(req,res){
         var order_info = JSON.parse(reply);
         res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
         var code = "200";
-        res.end(JSON.stringify({"code":code,"ret":order_info.ret}));
+        res.end(JSON.stringify({"code":code,"ret":order_info.ret,"amount":order_info.amount}));
     });
 };
