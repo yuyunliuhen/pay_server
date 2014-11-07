@@ -22,6 +22,7 @@ exports.on_pay_result = function(req,res){
     order_info.cardstatus = req.body['cardstatus'];
     order_info.merpriv = req.body['merpriv'];
     var verifystring = req.body['verifystring'];
+    http_logger.debug(verifystring);
     /*
     try{
         var decrypted_verifystring = key.decrypt(verifystring, 'utf8');
