@@ -22,24 +22,23 @@ exports.on_pay_result = function(req,res){
     order_info.cardstatus = req.body['cardstatus'];
     order_info.merpriv = req.body['merpriv'];
     var verifystring = req.body['verifystring'];
-    http_logger.debug(verifystring);
-
-    try{
-        var decrypted_verifystring = key.decrypt(verifystring, 'utf8');
-        http_logger.debug(decrypted_verifystring);
-        var decrypted_verifystring_array = decrypted_verifystring.split('|');
-        http_logger.debug(decrypted_verifystring_array);
+    if(0){
+        try{
+            var decrypted_verifystring = key.decrypt(verifystring, 'utf8');
+            http_logger.debug(decrypted_verifystring);
+            var decrypted_verifystring_array = decrypted_verifystring.split('|');
+            http_logger.debug(decrypted_verifystring_array);
+        }
+        catch (e){
+            http_logger.error(e.message);
+        }
     }
-    catch (e){
-        http_logger.error(e.message);
-    }
-    console.log(order_info);
     redis_fly_flow_wrapper.set(order_info.orderid,order_info,function(reply){
         res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
         var code = "0";
         var tips = "接收成功";
         if(reply){
-            console.log("set ok");
+            http_logger.debug("set ok");
         }
         res.end(JSON.stringify({"code":code,"tips":tips}));
     });
