@@ -9,6 +9,7 @@ var http_logger = log4js.getLogger('http-logger');
 
 exports.on_pay_result_verify = function(req,res){
     var orderid = req.body['orderid'];
+    http_logger.debug(orderid);
     redis_fly_flow_wrapper.get(orderid,function(reply){
         var order_info = JSON.parse(reply);
         http_logger.debug(order_info);
