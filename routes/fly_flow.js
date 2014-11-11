@@ -33,13 +33,15 @@ exports.on_pay_result = function(req,res){
             http_logger.error(e.message);
         }
     }
+    var code = "1";
+    var tips = "接收失败";
     redis_fly_flow_wrapper.set(order_info.orderid,order_info,function(reply){
         res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
-        var code = "0";
-        var tips = "接收成功";
         if(reply){
-            http_logger.debug("set ok");
+            code = "0";
+            tips = "接收成功";
         }
+        http_logger.debug(tips);
         res.end(JSON.stringify({"code":code,"tips":tips}));
     });
 };
