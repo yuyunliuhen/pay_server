@@ -33,15 +33,21 @@ exports.on_pay_result = function(req,res){
             http_logger.error(e.message);
         }
     }
-    var code = "1";
-    var tips = "接收失败";
+    var code;
+    var tips;
+    if(order_info.ret){
+        code = 0;
+        tips = "接收成功";
+    }
+    else{
+        code = 1;
+        tips = "接收失败";
+    }
     redis_fly_flow_wrapper.set(order_info.orderid,order_info,function(reply){
         res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
         if(reply){
-            code = "0";
-            tips = "接收成功";
+            //  do nothing
         }
-        http_logger.debug(tips);
-        res.end(JSON.stringify({"code":code,"tips":tips}));
+        res.end(JSON.stringify({"code":code?code:1,"tips":tips?tips:"接收失败"}));
     });
 };
