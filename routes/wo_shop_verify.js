@@ -7,6 +7,6 @@ log4js.configure(log_json);
 var http_logger = log4js.getLogger('http-logger');
 
 exports.on_pay_result_verify = function(req,res){
-    http_logger.debug(JSON.stringify(req));
+    http_logger.debug(req);
     res.end(JSON.stringify({"code":200}));
 };
