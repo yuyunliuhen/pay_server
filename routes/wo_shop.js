@@ -14,7 +14,6 @@ exports.on_pay_result = function(req,res){
 
         }
     }
-    http_logger.debug(req);
-    //http_logger.debug(res);
+    http_logger.debug(JSON.stringify(req));
     res.end(JSON.stringify({"code":200}));
 };
