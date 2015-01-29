@@ -9,6 +9,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var fly_flow = require('./routes/fly_flow');
 var fly_flow_verify = require('./routes/fly_flow_verify');
+var wo_shop = require('./routes/wo_shop');
 
 var app = express();
 
@@ -29,6 +30,7 @@ app.use('/users', users);
 //  http route
 app.post('/fly_flow', fly_flow.on_pay_result);
 app.post('/fly_flow_verify', fly_flow_verify.on_pay_result_verify);
+app.post('/wo_shop', wo_shop.on_pay_result);
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
