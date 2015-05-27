@@ -23,7 +23,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
 app.use('/', routes);
 app.use('/users', users);
 
@@ -31,6 +30,7 @@ app.use('/users', users);
 app.post('/fly_flow', fly_flow.on_pay_result);
 app.post('/fly_flow_verify', fly_flow_verify.on_pay_result_verify);
 app.post('/fat_princess_verify', fat_princess_verify.on_pay_result_verify);
+
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
